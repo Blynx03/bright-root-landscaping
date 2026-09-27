@@ -1,0 +1,61 @@
+.mobileHeader {
+    width: 100%;
+    min-height: 4.5rem;
+    background-color: var(--color-paper);
+    border-bottom: 0.625rem solid var();
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid red;
+    display: visible;
+}
+
+.desktopHeader {
+    display: none;
+}
+
+
+
+/* Desktop */
+@media (min-width: 64rem) {
+    .desktopHeader {
+        width: 100%;
+        min-height: 5.5rem;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        border: 1px solid red;
+    }
+
+    .mobileHeader {
+        display: none;
+    }
+
+    .desktopLogoContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        border: 1px solid green;
+    }
+
+    .desktopLogo {
+        height: 100%;
+        border: 1px solid blue;
+    }
+
+    .desktopNav {
+        width: 60%;
+    }
+    .desktopContact {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 50%;
+    }
+
+    .desktopPhoneContainer {
+        height: 50%;
+        border: 1px solid red;
+    }
+}
+

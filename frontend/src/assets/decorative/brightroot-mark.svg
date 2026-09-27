@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">BrightRoot leaf mark</title>
+  <g fill="none" stroke="#436B4F" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M30 55C30 37 36 19 50 8" stroke-width="3"/>
+    <path d="M35 32C20 32 12 24 11 11c15-1 24 7 24 21Z" fill="#70835D" stroke-width="2.5"/>
+    <path d="M39 22C42 10 50 5 61 7c-2 12-9 17-22 15Z" fill="#436B4F" stroke-width="2.5"/>
+    <path d="M29 44C19 47 11 43 7 35c10-4 18-1 22 9Z" fill="#BD8B4B" stroke-width="2.5"/>
+  </g>
+</svg>
