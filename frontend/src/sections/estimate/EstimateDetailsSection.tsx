@@ -66,7 +66,7 @@ type ApiResponse = {
 
 const EstimateDetailsSection = ({className = '', formMode}: EstimateDetailsProps) => {
 
-    const API_URL = '';
+    const API_URL = import.meta.env.VITE_API_URL;
 
     const termsAndCondition = 'I understand that submitting this form does not constitute a binding quote. This information will be used only to review my request and contact me about my project.'
     const textAreaPlaceholder = 'Share any additional details about your vision, the space or specific goals.'
