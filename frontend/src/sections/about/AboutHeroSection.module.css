@@ -1,0 +1,58 @@
+.aboutHeroSection {
+    background-color: var(--color-forest-900);
+}
+
+.heading {
+    padding: var(--space-6) var(--space-5) 0;
+    width: 95%;
+}
+
+.heroImageContainer {
+    margin-top: -1.5rem;
+    position: relative;
+    height: 45vw;
+    overflow: hidden;
+    margin-bottom: var(--space-5);
+}
+
+.heroImage {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    aspect-ratio: auto;
+    object-fit: cover;
+    object-position: right, bottom;
+}
+
+@media (min-width: 64rem) {
+    .aboutHeroSection {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: clamp(28rem, 35vw, 30rem);
+        overflow: hidden;
+        box-shadow: var(--shadow-card);
+    }
+
+    .aboutHeroPageContainer {
+        height: clamp(28rem, 35vw, 30rem);
+        /* margin-left: calc((100% - ((var(--container-max)) / 2)) - var(--page-gutter)); */
+        padding-top: var(--space-7);
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+        /* width: 100%; */
+        width: min(100%, var(--container-max));
+    }
+
+    .heading {
+        padding-left: 0;
+        align-items: center;
+        width: clamp(20rem, 44vw, 35rem);
+    }
+
+    .heroImageContainer {
+        margin: 0;
+        height: clamp(28rem, 35vw, 30rem);
+    }
+
+}

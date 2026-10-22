@@ -1,8 +1,16 @@
-import React from 'react'
+import AboutBar from "@/sections/about/AboutBar"
+import AboutCard from "@/sections/about/AboutCard"
+import AboutHeroSection from "@/sections/about/AboutHeroSection"
+import EstimateCtaSection from "@/sections/home/EstimateCtaSection"
 
 const AboutPage = () => {
   return (
-    <div>AboutPage</div>
+    <>
+      <AboutHeroSection />
+      <AboutCard />
+      <AboutBar />
+      <EstimateCtaSection />
+    </>
   )
 }
 

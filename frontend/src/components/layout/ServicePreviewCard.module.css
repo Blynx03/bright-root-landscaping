@@ -1,0 +1,144 @@
+.serviceCardContainer {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+    gap: var(--gap-group);
+    border-top: 1px solid var(--color-border);
+    place-items: center;
+    padding: var(--space-1) 0;
+}
+
+.imageContainer {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.image {
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+    border-radius: 6px;
+}
+
+.detailsContainer {
+    display: flex;
+    flex-direction: column;
+    padding-left: var(--space-3);
+    justify-self: left;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    /* width: fit-content; */
+    font-size: var(--font-size-eyebrow);
+    color: var(--color-gold-500);
+    font-weight: 600;
+}
+
+.eyebrow::after {
+    content: '';
+    width: var(--space-7);
+    height: 2.2px;
+    margin-left: var(--space-4);
+    background-color: var(--color-gold-500);
+}
+
+.title {
+    font-size: var(--font-size-h3);
+    font-family: var(--font-heading);
+}
+
+.description {
+    font-size: var(--font-size-eyebrow);
+    line-height: 1rem;
+    margin-bottom: var(--space-2);
+}
+
+.linkContainer {
+    display: flex;
+    flex-direction: row;
+    gap: var(--gap-group);
+    align-items: center;
+}
+
+.link {
+    font-size: var(--font-size-eyebrow);
+    font-weight: 600;
+    color: var(--color-forest-800);
+    text-decoration-color: var(--color-gold-500);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+}
+
+.iconContainer {
+    width: var(--space-5);
+    height: var(--space-5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrowRightIcon {
+    width: 100%;
+    height: 100%;
+    stroke: var(--color-gold-500);
+}
+
+@media (min-width: 64rem) {
+    .serviceCardContainer {
+        display: flex;
+        border-top: none;
+        gap: var(--gap-card);
+        padding: 0;
+        align-items: center;
+        height: clamp(10rem, 10vw, 11rem);
+    }
+
+    .imageContainer {
+        width: 65%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 0.5rem;
+        box-shadow: 10px 10px 20px var(--color-moss-500);
+    }
+
+    .image {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 2.5/1;
+        /* aspect-ratio: auto; */
+        object-fit: cover;
+        object-position: bottom; 
+    }
+
+    .detailsContainer {
+        width: 35%;
+        display: flex;
+        flex-direction: row;
+        gap: var(--gap-card);
+    }
+
+    .eyebrow {
+        align-self: flex-start;
+        margin-top: var(--space-2);
+        font-size: var(--font-size-small);
+    }
+
+    .serviceDetailsContainer {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-group);
+        color: var(--color-forest-800);
+    }
+
+    .description {
+        font-size: var(--font-size-small);
+        color: var(--color-ink-600);
+    }
+
+    .link {
+        font-size: var(--font-size-small);
+    }
+}

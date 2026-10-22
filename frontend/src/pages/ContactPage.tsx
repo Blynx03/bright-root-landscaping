@@ -1,8 +1,14 @@
-import React from 'react'
+import { ContactDetailsSection } from '@/sections/contact/ContactDetailsSection'
+import ContactHeroSection from '@/sections/contact/ContactHeroSection'
+import ContactRequestBar from '@/sections/contact/ContactRequestBar'
 
 const ContactPage = () => {
   return (
-    <div>ContactPage</div>
+    <>
+      <ContactHeroSection />
+      <ContactDetailsSection />
+      <ContactRequestBar />
+    </>
   )
 }
 

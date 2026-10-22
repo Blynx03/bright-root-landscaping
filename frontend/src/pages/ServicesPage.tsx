@@ -1,9 +1,16 @@
-import React from 'react'
+import ServicesDetails from '@/sections/services/ServicesDetails'
+import ServicesHeroSection from '@/sections/services/ServicesHeroSection'
+import ServicesProcessBar from '@/sections/services/ServicesProcessBar'
+
 
 const ServicesPage = () => {
-  return (
-    <div>ServicesPage</div>
-  )
+    return (
+        <>
+            <ServicesHeroSection />
+            <ServicesDetails />
+            <ServicesProcessBar />
+        </>
+    )
 }
 
 export default ServicesPage

@@ -1,8 +1,14 @@
-import React from 'react'
+import EstimateCtaSection from "@/sections/home/EstimateCtaSection"
+import ProjectDetailsSection from "@/sections/projects/ProjectDetailsSection"
+import ProjectsHeroSection from "@/sections/projects/ProjectsHeroSection"
 
 const ProjectsPage = () => {
   return (
-    <div>ProjectsPage</div>
+    <>
+      <ProjectsHeroSection />
+      <ProjectDetailsSection />
+      <EstimateCtaSection />
+    </>
   )
 }
 

@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import styles from './ButtonLink.module.css'
 
 type ButtonProps = {
   page: 'estimate' | 'contact' | '' | 'about' | 'projects' | 'services';
@@ -8,7 +9,7 @@ type ButtonProps = {
 
 const ButtonLink = ({page, text, className = ''}: ButtonProps) => {
   return (
-    <NavLink to={`/${page}`} className={`button btn ${className}`.trim()}>{text} </NavLink>
+    <NavLink to={`/${page}`} className={`${styles.button} ${className}`.trim()}>{text} </NavLink>
   )
 }
 

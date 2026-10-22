@@ -1,0 +1,31 @@
+.detailsContainer {
+    display: flex;
+    padding: var(--space-4) 0;
+}
+
+.mobilePageContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-group);
+}
+
+.desktopPageContainer {
+    display: none;
+}
+
+
+@media (min-width: 64rem) {
+    .detailsContainer {
+        padding: var(--section-padding) 0;
+    }
+    
+    .mobilePageContainer {
+        display: none;
+    }
+
+    .desktopPageContainer {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-section);
+    }
+}

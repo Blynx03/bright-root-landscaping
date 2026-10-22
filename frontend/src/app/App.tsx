@@ -6,23 +6,26 @@ import ProjectsPage from '../pages/ProjectsPage';
 import ServicesPage from '../pages/ServicesPage';
 import SiteHeader from '@/components/layout/SiteHeader';
 import SiteFooter from '@/components/layout/SiteFooter';
-import { PageContainer } from '@/components/layout/PageContainer';
+import AboutPage from '@/pages/AboutPage';
+import ContactPage from '@/pages/ContactPage';
+import ScrollTop from '@/components/ui/ScrollTop';
 
 function App() {
 
   return (
     <>
       <SiteHeader />
-      <PageContainer>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/estimate' element={<EstimatePage />} />
-          <Route path='/about' element={<EstimatePage />} />
-          <Route path='/projects' element={<ProjectsPage />} />
-          <Route path='/services' element={<ServicesPage />} />
-          <Route path='/error' element={<NotFoundPage />} />
-        </Routes>
-      </PageContainer>
+        <ScrollTop />
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/contact/inquiry' element={<EstimatePage formMode='contact' />} />
+            <Route path='/estimate' element={<EstimatePage formMode='estimate' />} />
+            <Route path='/about' element={<AboutPage />} />
+            <Route path='/projects' element={<ProjectsPage />} />
+            <Route path='/services' element={<ServicesPage />} />
+            <Route path='/contact' element={<ContactPage />} /> 
+            <Route path='*' element={<NotFoundPage />} />
+          </Routes>
       <SiteFooter />
     </>
   )

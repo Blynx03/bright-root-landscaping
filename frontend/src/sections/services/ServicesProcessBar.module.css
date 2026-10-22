@@ -1,0 +1,173 @@
+.serviceProcessBarContainer {
+    background-color: var(--color-border);
+}
+
+.serviceProcessBarPageContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-group);
+    align-items: center;
+    padding: var(--gap-heading);
+}
+
+.eyebrow {
+    display: inline-flex;
+    font-size: var(--font-size-eyebrow);
+    color: var(--color-gold-500);
+    text-transform: uppercase;
+    align-items: center;
+    font-weight: 600;
+}
+
+.eyebrow::before, .eyebrow::after {
+    content: '';
+    width: var(--space-5);
+    background-color: var(--color-gold-500);
+    height: 1px;
+    margin: 0 var(--space-3);
+}
+
+.title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h3);
+    color: var(--color-forest-800);
+    width: 80%;
+}
+
+.mobileProcessesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-group);
+}
+
+.detailContainer {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 3fr;
+    column-gap: var(--space-4);
+    align-items: center;
+}
+
+.iconContainer {
+    width: var(--space-7);
+    height: var(--space-7);
+    border-radius: 100%;
+    border: 3px solid var(--color-ink-300);
+    overflow: hidden;
+}
+
+.image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: var(--color-paper);
+}
+
+.step {
+    display: inline-flex;
+    position: relative;
+    font-size: var(--font-size-eyebrow);
+    color: var(--color-gold-500);
+    font-weight: 600;
+    justify-content: center;
+}
+
+.mobileProcessesContainer .detailContainer:not(:last-child) .step::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    height: var(--space-7);
+    width: 2px;
+    background-color: var(--color-ink-300);
+}
+
+.processContainer {
+    display: flex;
+    flex-direction: column;
+    color: var(--color-forest-800);
+}
+
+.processTitle {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-lead);
+}
+
+.processDescription {
+    font-size: var(--font-size-eyebrow);
+    line-height: 1rem;
+}
+.desktopProcessesContainer {
+    display: none;
+}
+
+@media (min-width: 64rem) {
+
+    .mobileProcessesContainer {
+        display: none;
+    }
+
+    .desktopProcessesContainer {
+        display: flex;
+        gap: var(--gap-card)
+    }
+
+    .serviceProcessBarPageContainer {
+        padding: var(--space-6) 0;
+    }
+
+    .eyebrow {
+        font-size: var(--font-size-small);
+    }
+
+    .title {
+        text-align: center;
+        font-size: var(--font-size-h3);
+        margin-bottom: var(--space-4);
+    }
+
+    .detailContainer {
+        grid-template-columns: 1.25fr 0.5fr 2.75fr;
+
+    }
+
+    .desktopProcessesContainer > .detailContainer:not(:last-child) {
+        grid-template-columns: 1fr 0.5fr 3fr 1fr;
+
+    }
+    /* .detailContainer::after {
+        content: url(/frontend/src/assets/service-page/icons/arrow-right.svg);
+        position: absolute;
+        width: var(--space-7);
+        height: var(--space-7);
+
+    } */
+
+    .step {
+        font-size: var(--font-size-body);
+        align-self: flex-start;
+        margin-top: var(--space-1);
+    }
+
+    .iconContainer {
+        width: var(--space-9);
+        height: var(--space-9);
+        /* border-radius: 100%;
+        object-fit: cover;
+        border: 1px solid red; */
+    }
+
+    .image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .arrowContainer {
+        width: var(--space-7);
+        height: var(--space-7);
+        color: var(--color-gold-500);
+    }
+
+    .arrowIcon {
+        color: var(--color-gold-500);
+    }
+
+}

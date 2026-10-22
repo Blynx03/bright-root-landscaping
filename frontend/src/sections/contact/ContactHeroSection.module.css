@@ -1,0 +1,98 @@
+.contactHeroSection {
+    display: flex;
+    flex-direction: column;
+}
+
+.contactHeroSectionPageContainer {
+    padding: var(--space-6) 0;
+}
+
+.headingImageContainer {
+    height: 50vw;
+    overflow: hidden;
+    position: relative;
+    margin-top: -30px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-card);
+}
+
+.headingImage {
+    position: absolute;
+    aspect-ratio: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right;
+}
+
+@media (min-width: 48rem) and (max-width: 63.9375rem) {
+    .contactHeroSection {}
+}
+
+@media (min-width: 64rem) {
+    .contactHeroSection {
+        position: relative;
+        display: grid;
+        width: 100%;
+        height: clamp(28rem, 40vw, 36rem);
+        overflow: hidden;
+        background-color: var(--color-cream-100);
+    }
+
+    .contactHeroSectionPageContainer {
+        padding: 0;
+        height: clamp(28rem, 40vw, 36rem);
+    }
+    
+    .headingContainer {
+        position: relative;
+        padding: var(--section-padding) 0;
+        position: relative;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        width: 40%;
+        background-color: var(--color-cream-100);
+    }
+
+    .heading {
+        height: calc(100% + (var(--section-padding)) * 2);
+        /* max-width: 30rem; */
+        width: 100%;
+        padding-top: var(--section-padding);
+    }
+
+    .headingContainer::after {
+        position: absolute;
+        content: '';
+        height: calc(100% + (var(--page-gutter) * 2));
+        right: -100px;
+        width: 100px;
+        background: linear-gradient(to right, var(--color-cream-100) 0%, var(--color-cream-100) 20%, transparent 100%);
+        z-index: 5;
+    }
+
+    .headingImageContainer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60%;
+        height: 100%;
+        overflow: hidden;
+        margin: 0;
+        box-shadow: none;
+    }
+
+    .headingImage {
+        display: block;
+        position: static;
+        width: 100%;
+        height: 100%;
+        aspect-ratio: auto;
+  
+        object-fit: cover;
+        object-position: 10% left;
+    }
+
+}

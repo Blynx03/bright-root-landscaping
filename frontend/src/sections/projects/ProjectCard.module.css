@@ -1,0 +1,52 @@
+.projectCardContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-group);
+    padding-bottom: var(--space-2);
+}
+
+.imageContainer {
+    position: relative;
+    height: 35vw;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+}
+
+.image {
+    position: absolute;
+    aspect-ratio: 2/1;
+    object-fit: cover;
+    object-position: bottom;
+}
+
+.detailsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.eyebrow {
+    color: var(--color-gold-500);
+    font-size: var(--font-size-eyebrow);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-lead);
+    color: var(--color-forest-900);
+}
+
+.location {
+    color: var(--color-forest-800);
+}
+
+@media (min-width: 64rem) {
+    .imageContainer {
+        height: 200px;
+    }
+
+    .eyebrow {
+    }
+}

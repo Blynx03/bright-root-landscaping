@@ -1,0 +1,106 @@
+.mobileColors {
+    --containerBgColor: var(--color-cream-100);
+    --eyebrowColor: var(--color-leaf-600);
+}
+
+.desktopColors {
+    --containerBgColor: transparent;
+}
+
+.cardContainer {
+    padding: var(--space-6) var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-heading);
+    background-color: var(--containerBgColor);
+}
+
+.quoteContainer {
+    padding: var(--space-4) 0;
+    width: 100%;
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+}
+
+.openQuoteIconContainer, .closeQuoteIconContainer {
+    width: var(--space-5);
+    height: var(--space-5);
+    display: flex;
+    place-items: center;
+}
+
+
+.closeQuoteIconContainer {
+    transform: rotate(180deg);
+    align-self: flex-end;
+    
+}
+
+.quoteIcon {
+    width: 100%;
+    height: 100%;
+}
+
+svg {
+    fill: var(--color-gold-500);
+}
+
+.eyebrow {
+    display: block;
+    text-transform: uppercase;
+    font-size: var(--font-size-eyebrow);
+    letter-spacing: 1px;
+    color: var(--color-leaf-600);
+    font-weight: 600;
+}
+
+.quote {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h3);
+    padding: 0 var(--space-5);
+}
+
+.nameAddressContainer {
+    display: flex;
+}
+
+.nameAndAddress {
+    font-size: var(--font-size-small);
+    color: var(--color-ink-600);
+    font-weight: 500;
+}
+
+@keyframes show {
+    0%{opacity: 0}
+    100%{opacity: 1}
+}
+
+@media (min-width: 64rem) {
+    .cardContainer {
+        --eyebrow: none;
+    }
+
+    .eyebrow {
+        display: var(--eyebrow);
+    }
+
+    .quote {
+        font-style: italic;
+        color: var(--color-forest-800);
+        animation: show 1000ms linear forwards;
+    }
+
+    .nameAndAddressAndServicesContainer {
+        color: var(--color-forest-800);
+        font-size: var(--font-size-body);
+    }
+
+    .customer {
+        font-weight: 600;
+    }
+
+    .location, .service {
+        margin-left: var(--space-4);
+    }
+}

@@ -1,29 +1,115 @@
+.siteHeader {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: rgba(217, 221, 207, 0.9);
+    box-sizing: border-box;
+}
+
 .mobileHeader {
     width: 100%;
     min-height: 4.5rem;
-    background-color: var(--color-paper);
-    border-bottom: 0.625rem solid var();
-    flex-direction: row;
-    justify-content: space-between;
-    border: 1px solid red;
-    display: visible;
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr;
+    grid-template-rows: 4.5rem;
+    align-items: center;
 }
 
 .desktopHeader {
     display: none;
 }
 
+.mobileLogoContainer {
+    max-height: 100%;
+    width: 100%;
+    cursor: pointer;
+    padding-block: var(--space-1);
+    display: flex;
+    justify-content: flex-start;
+}
 
+.mobileLogo {
+    display: block;
+    width: 10rem;
+    height: auto;
+}
+
+.mobileContactContainer {
+    display: flex;
+    width: 100%;
+    height: var(--space-6);
+    justify-content: flex-end;
+}
+
+.mobilePhone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--space-6);
+    height: 100%;
+}
+
+.phoneIcon {
+    height: 100%;
+    fill: transparent;
+}
+
+.mobileMenuButton {
+    display: flex;
+    justify-content: flex-end;
+    border: none;
+    width: 100%;
+    position: relative;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.menuIcon {
+    width: var(--space-6);
+    height: var(--space-6);
+    background-color: var(--color-cream-100);
+}
+
+.mobileContentContainer {
+    position: absolute;
+    top: calc(100% - var(--page-gutter));
+    right: var(--page-gutter);
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    background-color: var(--color-paper);
+    /* color: var(--color-paper); */
+    padding: var(--space-5) var(--page-gutter);
+    border-top: var(--border-thin) solid var(--color-border);
+    box-shadow: var(--shadow-card);
+}
+
+.mobileContentLink {
+    color: var(--color-forest-900);
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* tablet */
+@media (min-width: 48rem) and (max-width: 63.9375rem) {
+    .mobileHeader {
+        grid-template-columns: auto 5rem 5rem;
+    }
+}
 
 /* Desktop */
 @media (min-width: 64rem) {
     .desktopHeader {
         width: 100%;
-        min-height: 5.5rem;
+        height: 5.5rem;
         display: grid;
-        grid-template-columns: auto 1fr auto;
+        grid-template-columns: 1.5fr 2.5fr 2fr;
+        grid-template-rows: 100%;
         align-items: center;
-        border: 1px solid red;
     }
 
     .mobileHeader {
@@ -31,31 +117,110 @@
     }
 
     .desktopLogoContainer {
+        min-width: 0;
+        height: 5.5rem;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
-        height: 100%;
-        border: 1px solid green;
     }
 
     .desktopLogo {
-        height: 100%;
-        border: 1px solid blue;
+        display: block;
+        width: 15rem;
+        height: auto;
+        max-height: 5.5rem;
+        object-fit: contain;
+        cursor: pointer;
+        margin-left: 20px;
     }
 
     .desktopNav {
-        width: 60%;
-    }
-    .desktopContact {
+        width: 100%;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
+        gap: var(--gap-paragraph);
+    }
+
+    .desktopNavLink {
+        color: var(--color-forest-900);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color var(--transition-fast), transform var(--transition-fast);
+        font-size: clamp(0.85rem, 1vw ,1rem);
+        cursor: pointer;
+    }
+
+    .desktopNavLink:hover {
+        color: var(--color-ink-300);
+        transform: scale(1.1);
+    }
+
+    .desktopNavActive {
+        color: var(--color-gold-500);
+        font-size: clamp(0.85rem, 1vw ,1rem);
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 6px;
+    }
+
+
+    .desktopContactContainer {
+        display: flex;
+        justify-content: flex-end;
         align-items: center;
-        height: 50%;
+        gap: var(--gap-heading);
+        transition: color var(--transition-base);
     }
 
     .desktopPhoneContainer {
-        height: 50%;
-        border: 1px solid red;
+        display: grid;
+        /* width: clamp(8.75rem, 8vw, 10rem); */
+        width: 100%;
+        grid-template-columns: 1.5fr 4fr;
+        grid-template-rows: 1fr;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-1);
+        cursor: pointer;
     }
+
+    .phoneIconContainer {
+        min-width: clamp(var(--space-3), 4vw, var(--space-6));
+        aspect-ratio: auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    .phoneIcon {
+        width: clamp(1.25rem, 2vw, 2rem);
+        height: 100%;
+    }
+
+    .desktopPhoneLink {
+        font-size: clamp(0.8rem, 1vw, var(--font-size-body));
+        white-space: nowrap;
+        color: var(--color-forest-900);
+        font-weight: 600;
+        transition: color var(--transition-fast), transform var(--transition-fast);
+        text-decoration: none;
+        justify-self: center;
+        cursor: pointer;
+    }
+
+    .desktopPhoneLink:hover {
+        color: var(--color-ink-300);
+        transform: scale(1.075);
+    }
+
+    .estimateButton {
+        background-color: var(--color-gold-500);
+        color: var(--color-paper);
+        transition: color var(--transition-fast);
+    }
+
+    .estimateButton:hover {
+        color: var(--color-forest-800);
+    }
+
 }
 

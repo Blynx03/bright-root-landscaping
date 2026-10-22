@@ -1,0 +1,24 @@
+.servicesSection {
+    background-color: var(--color-forest-800);
+    padding: var(--section-padding) 0;
+}
+
+.heading {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 64rem) {
+    .servicesSection {
+        padding: var(--space-8) 0 var(--space-10);
+        margin-bottom: var(--space-8);
+    }
+
+    .serviceCardsContainer {
+        display: flex;
+        gap: var(--gap-card);
+        padding-top: var(--space-6);
+    }
+
+
+}

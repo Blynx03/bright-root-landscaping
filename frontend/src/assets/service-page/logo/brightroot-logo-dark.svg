@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 72" role="img" aria-labelledby="title desc">
+  <title id="title">BrightRoot Lawn &amp; Landscape</title>
+  <desc id="desc">A branching leaf mark beside the BrightRoot wordmark.</desc>
+  <g fill="none" stroke="#173F2C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M35 58V18M35 34 23 23M35 42l13-13M35 28l8-9"/>
+    <path d="M22 23c-7-1-11-5-12-12 7 1 11 5 12 12ZM48 29c7-1 11-5 12-12-7 1-11 5-12 12ZM43 19c5-2 8-6 8-11-5 2-8 6-8 11Z"/>
+    <path d="M27 58h16"/>
+  </g>
+  <text x="76" y="37" fill="#173F2C" font-family="Georgia, 'Times New Roman', serif" font-size="28" letter-spacing=".4">BrightRoot</text>
+  <text x="78" y="56" fill="#BD8B4B" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="600" letter-spacing="3">LAWN &amp; LANDSCAPE</text>
+</svg>

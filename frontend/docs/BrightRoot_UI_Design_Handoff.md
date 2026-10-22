@@ -1,514 +1,304 @@
-# BrightRoot Lawn & Landscape
+# BrightRoot Lawn & Landscape — Linear Build Guide
 
-## UI/UX Design Handoff — Homepage and React Structure
+Version 2.1, aligned to GitHub commit `a170351`. This is the only implementation source of truth. Build it top to bottom; do not use the old handoff.
 
-Version: 1.0  
-Project: `bright-root-landscaping`  
-Brand: BrightRoot Lawn & Landscape  
-Tagline: Beautiful yards. Thoughtfully cared for.
+## 1. Locked decisions
 
-## 1. Purpose
+- React + TypeScript + CSS Modules; mobile-first.
+- `App.tsx` keeps the existing `<Routes>`. Put `SiteHeader` above and `SiteFooter` below them.
+- Navigation opens pages: Services `/services`, Our Work `/projects`, About `/about`, Contact `/contact`.
+- Logo opens `/`; estimate CTAs open `/estimate`.
+- No Home or Service Area navigation item.
+- Service-area order: Pickering, Ajax, Whitby, Oshawa, Clarington.
+- Homepage order: Hero, TrustBar, Services, ProjectsPreview, StoryTestimonial, EstimateCTA. Footer follows.
+- Unit rule: use `rem` for every CSS length in this project. Do not introduce `px` values. The thin-border token is `0.0625rem`, equivalent to one pixel at the standard root size.
 
-BrightRoot is a fictional portfolio concept for a professional residential landscaping and lawn-maintenance company serving Durham Region. The site must feel premium and polished without appearing exclusive, unaffordable, or corporate.
+## 2. Repository preservation plan
 
-Primary audience: homeowners with small-to-medium residential properties who need recurring maintenance, garden improvements, lawn restoration, patios, interlocking, or seasonal cleanup.
+The existing repository is the starting point. Do not recreate it.
 
-Primary conversion: Request a Free Estimate.  
-Secondary conversion: Call the company.
+### Keep as-is
 
-Service-area order must always be:
+- Root `frontend/` and `backend/` folders
+- `frontend/main.tsx` at the frontend root
+- `src/app/App.tsx` and the existing `<Routes>` approach
+- `PageContainer.tsx` and `PageContainer.module.css`
+- `tokens.css`, `global.css`, `vite.config.ts`, alias `@`, and font links in `index.html`
+- All seven page files
+- `SiteHeader`, `SiteFooter`, ButtonLink and the empty component/data/section scaffolds
+- All nine WebP images, icons and botanical SVGs
+- Both documentation files
 
-1. Pickering
-2. Ajax
-3. Whitby
-4. Oshawa
-5. Clarington
+### Remove only these files
 
-## 2. Professional Workflow
+- `src/App.css` — unused Vite starter CSS
+- `src/app/router.tsx` — empty and unnecessary because routes already live in `App.tsx`
+- `sections/home/ServiceAreaSection.tsx` — empty and removed from the approved homepage
 
-A professional designer/developer team normally works in this order:
+Deleting these three files does not discard completed work.
 
-1. Business brief and target customer
-2. Sitemap and conversion path
-3. Page content and section order
-4. Low-fidelity wireframe
-5. Visual system: typography, colours, spacing and imagery
-6. High-fidelity desktop and mobile design
-7. Component inventory and developer handoff
-8. Section-by-section implementation
-9. Responsive, accessibility and performance QA
-10. Client review, deployment and post-launch checks
+### Move or add assets
 
-The visual mockup is only one part of the handoff. This document is the implementation source of truth.
+- Create `src/assets/brand/`.
+- Move `src/assets/decorative/brightroot-mark.svg` to `src/assets/brand/brightroot-mark.svg`.
+- Add the supplied `brightroot-logo.svg` to `src/assets/brand/brightroot-logo.svg`; it is currently missing from the repository.
+- Keep phone, menu and close inside `src/assets/icons/`; do not move them to `decorative/`.
 
-## 3. Design Direction
+### Correct `App.tsx` without replacing it
 
-Keywords: refined, natural, dependable, warm, local, confident, uncluttered.
+- Remove the `PageContainer` that currently wraps `<Routes>`. Each page section uses its own container so full-width backgrounds can reach the viewport edges.
+- Change `/about` from `<EstimatePage />` to `<AboutPage />`.
+- Add `/contact` with `<ContactPage />`.
+- Replace `/error` with wildcard `*` for `<NotFoundPage />`.
+- Keep `SiteHeader` above and `SiteFooter` below `<Routes>`.
 
-Avoid:
+### Existing token names are authoritative
 
-- Neon or artificial greens
-- Cartoon gardening graphics
-- Excessive leaf decorations
-- Generic AI-looking imagery
-- Dense text blocks
-- Heavy animation
-- Cheap-looking discount language
-- Luxury-estate messaging that excludes ordinary homeowners
+Keep the repository’s `--section-padding` and gap tokens. Do not rename them to `--section-padding-y`. Correct only this typo:
 
-## 4. Colour System
+```css
+--shadow-floating: 0 1.25rem 3.4375rem rgba(16, 42, 30, 0.18);
+```
 
-Create these variables in `src/styles/tokens.css`:
+Change the existing pill radius to `--radius-pill: 999rem` for project-wide unit consistency. Add `--border-thin: 0.0625rem` to `:root` and use it for hairline borders.
+
+## 3. Build order
+
+1. Tokens and globals
+2. PageContainer
+3. SiteHeader
+4. HomePage
+5. HeroSection
+6. TrustBar
+7. ServicesSection
+8. ProjectsPreviewSection
+9. StoryTestimonialSection
+10. EstimateCtaSection
+11. SiteFooter
+12. Internal pages and QA
+
+Keep the existing empty scaffolds. Add a same-named `.module.css` only when you implement that component.
+
+## 4. Foundation
+
+### Tokens
+
+Keep the approved values in `styles/tokens.css`: colours, font families/sizes, line heights, spacing scale, container width, page gutter, section padding, radii, shadows and transitions. Component classes never belong there.
+
+Required responsive tokens:
 
 ```css
 :root {
-  --color-forest-900: #102a1e;
-  --color-forest-800: #173a2a;
-  --color-leaf-600: #436b4f;
-  --color-moss-500: #70835d;
-  --color-cream-100: #f5f1e8;
-  --color-paper: #fffdf8;
-  --color-white: #ffffff;
-  --color-ink-900: #1f2923;
-  --color-ink-600: #5f6b63;
-  --color-gold-500: #bd8b4b;
-  --color-border: #d9ddcf;
-  --color-error: #a63d40;
-  --color-success: #2f6b47;
+  --container-max: 75rem;
+  --page-gutter: 1rem;
+  --section-padding: 4rem;
 }
-```
 
-Usage rules:
-
-- Forest 900: footer and darkest surfaces
-- Forest 800: primary buttons, headings and navigation accents
-- Leaf 600: icons and subtle accents
-- Moss 500: quiet decorative details only
-- Cream 100: alternating section backgrounds
-- Paper: default page background
-- Gold 500: short rules, selected details and small highlights; never long body text
-- Ink 900: primary body text
-- Ink 600: secondary text
-
-## 5. Typography
-
-Fonts:
-
-- Display and headings: `DM Serif Display`, weight 400
-- Body and interface: `Inter`, weights 400, 500 and 600
-- Fallback headings: Georgia, serif
-- Fallback body: system-ui, sans-serif
-
-Import fonts in `src/styles/fonts.css` or through the HTML `<head>`.
-
-| Token | Desktop | Tablet | Mobile | Line height | Use |
-|---|---:|---:|---:|---:|---|
-| Display | 4.5rem | 3.5rem | 2.625rem | 1.05 | Homepage hero only |
-| H1 internal | 3.5rem | 3rem | 2.375rem | 1.10 | Page headings |
-| H2 | 3rem | 2.5rem | 2.125rem | 1.15 | Major sections |
-| H3 | 1.5rem | 1.375rem | 1.3125rem | 1.30 | Cards and subsections |
-| Lead | 1.1875rem | 1.125rem | 1.0625rem | 1.65 | Hero supporting copy |
-| Body | 1rem | 1rem | 1rem | 1.65 | Default text |
-| Small | 0.875rem | 0.875rem | 0.875rem | 1.55 | Supporting details |
-| Eyebrow | 0.75rem | 0.75rem | 0.75rem | 1.40 | Uppercase section label |
-| Button | 0.875rem | 0.875rem | 0.875rem | 1.00 | CTAs and navigation |
-
-Eyebrows use Inter 600, uppercase, with `0.14em` letter spacing.
-
-Do not use text below `0.875rem` for normal site content. Eyebrow labels may use `0.75rem`.
-
-## 6. Layout System
-
-### Container
-
-```css
---container-max: 75rem;
---page-gutter-desktop: 2rem;
---page-gutter-tablet: 1.5rem;
---page-gutter-mobile: 1rem;
-```
-
-All major content aligns to one centred `75rem` container. Full-width section backgrounds may extend to the viewport edges, but their content remains inside the container.
-
-### Breakpoints
-
-| Name | Width | Typical use |
-|---|---:|---|
-| Mobile | `30rem` | Small-phone refinements |
-| Tablet | `48rem` | Mobile/tablet layout change |
-| Laptop | `64rem` | Tablet/desktop layout change |
-| Desktop | `80rem` | Wide-screen refinements |
-
-Write mobile-first CSS. Breakpoints are guidance, not a reason to force fixed layouts that already fit.
-
-Use these values literally in native CSS media queries. Do not define them as CSS custom properties for use inside `@media` conditions because native CSS generally cannot resolve `var()` there. You can, however, change ordinary design tokens inside a media query:
-
-```css
 @media (min-width: 48rem) {
   :root {
     --page-gutter: 1.5rem;
-    --section-padding-y: 5rem;
+    --section-padding: 5rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --page-gutter: 2rem;
+    --section-padding: 6rem;
   }
 }
 ```
 
-### Spacing scale
+Use literal media breakpoints: `30rem`, `48rem`, `64rem`, `80rem`.
 
-Use only this scale unless a component has a documented exception:
+### Global CSS
 
-```css
---space-1: 0.25rem;
---space-2: 0.5rem;
---space-3: 0.75rem;
---space-4: 1rem;
---space-5: 1.5rem;
---space-6: 2rem;
---space-7: 3rem;
---space-8: 4rem;
---space-9: 5rem;
---space-10: 6rem;
-```
+`global.css` owns box-sizing, body defaults, margin reset, responsive images, inherited form fonts, focus-visible and `.srOnly`. Import `tokens.css` before `global.css` in `main.tsx`.
 
-Section padding:
+## 5. PageContainer
 
-- Desktop: `6rem` top and bottom
-- Tablet: `5rem` top and bottom
-- Mobile: `4rem` top and bottom
+**Files:** `components/layout/PageContainer.tsx` and `.module.css`.
 
-Common gaps:
-
-- Eyebrow to heading: `1rem`
-- Heading to supporting copy: `1.25rem`
-- Section heading block to content grid: `3rem`
-- Card-to-card gap: `1.5rem` desktop, `1rem` mobile
-
-### Where shared CSS belongs
-
-- `tokens.css`: reusable design decisions—colours, typography values, spacing scale, container width, page gutters, section padding, radii, shadows, transitions and z-index values.
-- `global.css`: reset and base behaviour—box sizing, body defaults, headings, links, buttons, images, focus states and global accessibility helpers.
-- Component CSS Modules: the actual layout and styling for a component or section, such as `Header.module.css`, `Hero.module.css` and `ServicesSection.module.css`.
-
-Recommended import order in `main.tsx`:
-
-```ts
-import './styles/tokens.css';
-import './styles/fonts.css';
-import './styles/global.css';
-```
-- Button group gap: `0.75rem`
-
-## 7. Shape and Elevation
+**Purpose:** align a major section to the common `75rem` grid. Use one in normal major sections, not around cards or small groups.
 
 ```css
---radius-sm: 0.5rem;
---radius-md: 0.75rem;
---radius-lg: 1rem;
---radius-xl: 1.5rem;
---radius-pill: 999rem;
-
---shadow-card: 0 0.75rem 2.125rem rgba(16, 42, 30, 0.10);
---shadow-floating: 0 1.25rem 3.4375rem rgba(16, 42, 30, 0.18);
-
---transition-fast: 160ms ease;
---transition-base: 240ms ease;
---transition-slow: 420ms ease;
+.pageContainer {
+  width: min(calc(100% - (var(--page-gutter) * 2)), var(--container-max));
+  margin-inline: auto;
+}
 ```
 
-- Primary and secondary buttons: `--radius-sm`
-- Pills, badges and compact tags only: `--radius-pill`
-- Service image cards: `--radius-md`
-- Large image panels: `--radius-lg` or organic custom clipping where specified
-- Form fields: `--radius-sm`
-- Avoid shadows on every component; use them for hover elevation, floating content or important panels
+**Done when:** it accepts `children` and optional `className`, centres content, and produces `1rem` mobile and `2rem` desktop gutters.
 
-## 8. Homepage Section Specification
+## 6. SiteHeader
 
-### A. `SiteHeader`
+**Files:** `components/layout/SiteHeader.tsx` and `.module.css`.
 
-- Height: `5.5rem` desktop; `4.5rem` mobile
-- White/paper background
-- Very subtle bottom border: `0.0625rem` solid Border
-- Content: brand left, navigation centred/right, telephone link, estimate CTA last
-- Desktop links: Services, Our Work, About, Service Area, Contact
-- Mobile: brand, telephone icon and menu button; estimate CTA moves into the menu
-- Sticky behaviour may be added after the static layout is complete
+**Assets:** `assets/brand/brightroot-logo.svg` and `assets/icons/phone.svg`, `menu.svg`, `close.svg`.
 
-### B. `HeroSection`
+Correct the current three broken imports before styling. The repository currently points phone and menu at `decorative/`, and the logo file is absent.
 
-- Minimum height: `44rem` desktop; content-driven on tablet and mobile
-- Two-part editorial composition: cream copy panel left, immersive garden photograph right
-- Desktop columns: approximately `44% / 56%`
-- The photograph crosses into the copy panel using one large organic inward curve; implement with `clip-path` or a pseudo-element, not a rasterized frame
-- Mobile: copy first and image second; remove the complex curve and use a gentle top-left radius
-- Copy column maximum width: `36rem`
+### Preserve and correct the current header
+
+Keep `SiteHeader.tsx`; do not rewrite from scratch. Correct these items in the file you already started:
+
+- Every `NavLink` callback currently uses braces without `return`. Return the active/inactive class string.
+- Add visible children: `Services`, `Our Work`, `About`, `Contact`. The current links are self-closing and therefore display no text.
+- Add `src={logoSVG}` to the mobile logo image.
+- Change telephone wrappers to `<a href="tel:+19052420064">`.
+- Keep `ButtonLink` for now; it can be refined after the header works.
+- Add `useState` only for opening and closing the mobile menu.
+
+Keep `SiteHeader.module.css`, but remove the temporary red/green/blue debug borders when alignment is confirmed. Fix `display: visible` to `display: flex`; fix the invalid `var()` and use `var(--border-thin) solid var(--color-border)`.
+
+**Placement:** above `<Routes>` in `App.tsx`; one PageContainer around the complete header.
+
+### Desktop (`64rem+`)
+
+- Paper background; `5.5rem` height; `var(--border-thin)` bottom border.
+- Grid `auto 1fr auto`: logo | navigation | phone + estimate.
+- Main gap `3rem`; logo width `10.5rem`.
+- Nav gap `2rem`; Inter 500, `0.875rem`.
+- Active/hover: Forest 800; active underline `0.125rem` gold.
+- Phone icon `1rem`; phone/CTA gap `1.5rem`.
+- Estimate button: gold, Forest 900 text, `3rem` minimum height, `1.375rem` horizontal padding, small radius.
+
+### Mobile/tablet (below `64rem`)
+
+- `4.5rem` row: logo left; telephone icon and menu button right.
+- Logo width `8.5rem`; controls at least `2.75rem` square; menu icon `1.5rem`.
+- Open menu stacks the same four links plus a full-width estimate CTA.
+- Menu: Paper background, `var(--border-thin)` top border, `1.5rem` vertical padding, `1rem` link gap.
+- CSS shows desktop or mobile layout. React state controls only `isMenuOpen`.
+
+### Behaviour
+
+- `NavLink` for four nav links; `Link` for logo/estimate.
+- Use router-provided `isActive`; no active-link state.
+- Menu button: `aria-expanded`, `aria-controls="mobile-navigation"`, useful label.
+- Selecting a mobile link closes the menu.
+- Telephone placeholder: `(905) 242-0064`, `tel:+19052420064`.
+
+**Done when:** one responsive layout is visible, routes work, active link is clear, menu works by keyboard, and there is no `20rem` overflow.
+
+## 7. HomePage
+
+`HomePage.tsx` only assembles the six homepage sections in the locked order. It contains no header, footer, router or outer PageContainer.
+
+## 8. HeroSection
+
+**Assets:** `hero-landscaped-garden.webp`, `location.svg`, `botanical-branch-left.svg`.
+
+**Content:**
+
 - Eyebrow: `Landscapes for a brighter tomorrow`
 - H1: `Beautiful yards. Thoughtfully cared for.`
-- Supporting copy: `Landscape design, lawn care, and seasonal maintenance for homes across Durham Region.`
-- Supporting copy maximum width: `34rem`
-- Primary CTA: Request a Free Estimate
-- Secondary CTA: Explore Our Services
-- Location line: `Serving Pickering, Ajax, Whitby, Oshawa & Clarington`
-- Add subtle line-art foliage at the lower-left edge; it must not compete with the copy
+- Copy: `Landscape design, lawn care, and seasonal maintenance for homes across Durham Region.`
+- CTAs: `Request a Free Estimate` and `Explore Our Services`
+- Location: `Serving Pickering, Ajax, Whitby, Oshawa & Clarington`
 
-Hero photography must show:
+**Desktop:** minimum height `44rem`; cream copy `44%`, image `56%`; copy max `36rem`; image reaches right viewport edge. Gaps: eyebrow→H1 `1rem`, H1→copy `1.25rem`, copy→buttons `2rem`, button gap `0.75rem`, location top `1.5rem`. Image covers; organic divider may use `clip-path`.
 
-- Real residential landscaping
-- Strong greenery and layered planting
-- A lawn, garden or patio relevant to Ontario homeowners
-- No tropical resort, commercial park or mansion-only impression
-- Enough darker/quiet space for readable text
+**Mobile/tablet:** copy then image; copy padding `4rem 0`; buttons stack below `30rem`; image minimum `22rem` mobile and `30rem` tablet; remove complex curve.
 
-### C. `TrustBar`
+**Done when:** H1 is unique, text never overlays busy photography, location is readable, and no mobile overflow exists.
 
-- Minimum height: `6.5rem`; content-driven on mobile
-- Paper background with quiet vertical separators
-- Four equal columns desktop; two columns tablet; one column on narrow mobile
-- Items: Locally Owned & Operated, Trusted Across Durham Region, Quality Work—Lasting Results, Residential Property Specialists
-- Use restrained line icons; no coloured icon circles
+## 9. TrustBar
 
-### D. `ServicesSection`
+**Items/assets:** leaf—Locally Owned & Operated; people—Trusted Across Durham Region; shield-check—Quality Work, Lasting Results; home—Residential Property Specialists.
 
-- Forest 900 background with subtle botanical line art at very low opacity
-- Heading and supporting copy use a two-column editorial heading row
-- Heading: `Complete care for every season.`
-- Three desktop columns; one mobile column
-- Cards use a landscape photograph above a paper-coloured text panel
-- Image aspect ratio: `4 / 3`
-- Text panel padding: `1.5rem`
-- Categories:
-  1. Landscape Design
-  2. Lawn & Garden Care
-  3. Seasonal Maintenance
-- Each card contains one image, H3, short paragraph and text link; do not add large icons
-- Cards lift no more than `0.25rem` on hover
+- Paper background, PageContainer, desktop minimum height `6.5rem`.
+- Four columns desktop, two tablet, one narrow mobile.
+- Icon `1.75rem`; text Inter 500 `0.875rem`; gap `0.75rem`.
+- Quiet separators only in four-column layout.
 
-### E. `ProjectsPreviewSection`
+**Done when:** all items use the correct order; icons have empty alt because adjacent text repeats their meaning; separators disappear when wrapping.
 
-- Cream background
-- Editorial collage: one large project image spanning the left and centre, with two stacked detail images on the right
-- Desktop grid: approximately `2fr 1fr`; collage height approximately `36rem`
-- A paper information card overlaps the lower-left area of the main image
-- Card label: `Featured transformation`
-- Card heading: `From ordinary to extraordinary.`
-- Example location: Whitby
-- Images use square corners or no more than `--radius-sm`; the composition supplies the visual interest
-- Mobile: information card appears before the images; images become one column
+## 10. ServicesSection
 
-### F. `StoryTestimonialSection`
+**Assets:** three `service-*.webp` images, `botanical-branch-right.svg`, `arrow-right.svg`.
 
-- Paper background
-- Three-column desktop composition: company story, organically cropped garden image, testimonial panel
-- Story heading: `More than landscapes. Stronger communities.`
-- Testimonial panel uses a pale green/cream surface, oversized quotation mark and restrained carousel controls
-- Use a clearly labelled sample testimonial in this portfolio concept; never imply it is a verified customer review
-- Stack story, image and testimonial on mobile
+**Content:** eyebrow `Our services`; H2 `Complete care for every season.`; cards in order: Landscape Design, Lawn & Garden Care, Seasonal Maintenance. Links say `Learn More` and lead to `/services`.
 
-### G. `ServiceAreaSection`
+- Forest 900 full-width background; `var(--section-padding)`; PageContainer.
+- Heading/introduction: one column mobile, two desktop; heading white, copy white at 82%.
+- Grid begins `3rem` below; one column mobile, three at `64rem`; gap `1rem`/`1.5rem`.
+- Cards: `4 / 3` image over Paper text panel; panel padding `1.5rem`.
+- Hover lifts no more than `0.25rem`; branch stays very faint.
 
-- Heading: `Local care across Durham Region.`
-- City order: Pickering, Ajax, Whitby, Oshawa, Clarington
-- Use a clean city list and short coverage statement
-- Do not embed an inaccurate decorative map; add a real map only if it improves customer understanding
+**Done when:** correct image/order, equal desktop card rhythm, useful alt text, and content remains clear without hover.
 
-### H. `EstimateCtaSection`
+## 11. ProjectsPreviewSection
 
-- Full-width split composition: forest content panel left and evening garden/path photograph right
-- Minimum height: `30rem` desktop
-- Heading: `Let’s create a yard you’ll love coming home to.`
-- Left content padding: `clamp(2rem, 5vw, 5rem)`
-- Include both estimate and services CTAs plus the ordered service-area line
-- Mobile: content first, photograph second; minimum image height `18rem`
+**Assets:** `project-whitby-transformation.webp`, `project-stone-path-detail.webp`, `project-hydrangea-detail.webp`.
 
-### I. `SiteFooter`
+**Content:** label `Featured transformation`; H2 `From ordinary to extraordinary.`; copy `A complete backyard transformation in Whitby, featuring a natural stone patio, lush plantings and timeless detailing.`; link `View More Projects` → `/projects`.
 
-- Forest 900 background
-- Three desktop columns: brand, service area, contact
-- Service-area order: Pickering, Ajax, Whitby, Oshawa, Clarington
-- Include `Portfolio concept created for demonstration purposes.`
-- Stack on mobile
+- Cream background; section padding; PageContainer.
+- Desktop collage: main image two-thirds, two stacked details one-third; height about `36rem`; detail gap `0.5rem`.
+- Paper card overlaps lower-left main image; max width `22rem`, padding `2rem`, floating shadow.
+- Mobile: card first and three images in one column; no overlap; image height about `16rem`.
 
-## 9. Button Specification
+**Done when:** card does not hide focal point, mobile removes overlap, and all images have useful alt text.
 
-All buttons and button-like links:
+## 12. StoryTestimonialSection
 
-- Minimum height: `3rem`
-- Horizontal padding: `1.375rem`
-- Font: Inter 600, `0.875rem`
-- Radius: `--radius-sm`; reserve `--radius-pill` for badges and tags
-- Visible keyboard focus ring: `0.1875rem` with sufficient contrast
-- Primary: Forest 800 background, white text
-- Secondary on light surfaces: transparent with 1px Forest 800 border
-- Secondary on photo/dark surfaces: transparent dark overlay with semi-transparent white border
-- Disabled buttons must not rely on opacity alone
+**Assets:** `story-front-entrance.webp`, `quote.svg`, both chevrons.
 
-## 10. React Architecture
+**Content:** eyebrow `A local company rooted in community`; H2 `More than landscapes. Stronger communities.`; story copy from approved mockup; link `Our Story` → `/about`. Any quote must be labelled `Sample testimonial`.
 
-Professionals normally do not put the whole homepage into `App.tsx`. `App.tsx` should coordinate routing and global layout. Each major page section can be its own component, while small one-off text wrappers should remain inside their parent section.
+- Paper background; desktop columns approximately `36% 28% 36%`.
+- Image minimum height `31rem`; object-fit cover; organic crop allowed.
+- Testimonial panel Cream 100, padding `3rem`; quote icon `2.5rem`; quote text heading font around `1.375rem`.
+- Mobile stacks story, image, testimonial.
+- Omit carousel controls until functional; never present sample copy as a verified review.
 
-Recommended structure:
+**Done when:** sample label is obvious, link works, image crop is natural, and any controls work by keyboard.
 
-```text
-src/
-├── app/
-│   ├── App.tsx
-│   └── router.tsx
-├── assets/
-│   ├── images/
-│   └── icons/
-├── components/
-│   ├── layout/
-│   │   ├── PageContainer.tsx
-│   │   ├── SiteHeader.tsx
-│   │   └── SiteFooter.tsx
-│   └── ui/
-│       ├── ButtonLink.tsx
-│       ├── SectionHeading.tsx
-│       └── ServiceCard.tsx
-├── data/
-│   ├── projects.ts
-│   └── services.ts
-├── pages/
-│   ├── AboutPage.tsx
-│   ├── EstimatePage.tsx
-│   ├── HomePage.tsx
-│   ├── ProjectsPage.tsx
-│   ├── ServicesPage.tsx
-│   └── NotFoundPage.tsx
-├── sections/
-│   └── home/
-│       ├── EstimateCtaSection.tsx
-│       ├── HeroSection.tsx
-│       ├── ProjectsPreviewSection.tsx
-│       ├── ServiceAreaSection.tsx
-│       ├── ServicesSection.tsx
-│       ├── StoryTestimonialSection.tsx
-│       └── TrustBar.tsx
-├── styles/
-│   ├── global.css
-│   └── tokens.css
-└── main.tsx
-```
+## 13. EstimateCtaSection
 
-Naming rules:
+**Assets:** `cta-evening-garden.webp`, `location.svg`.
 
-- React components: PascalCase
-- Full homepage bands: suffix with `Section`
-- Site-wide structural components: `SiteHeader`, `SiteFooter`, `PageContainer`
-- Reusable cards or controls: name by purpose, such as `ServiceCard`
-- Pages: suffix with `Page`
-- Avoid vague names such as `Component1`, `Content`, `Box`, `Wrapper2` or `Info`
+**Content:** eyebrow `Ready to get started?`; H2 `Let’s create a yard you’ll love coming home to.`; estimate and services CTAs; complete service-area line.
 
-Do not create a component for every `<div>`. Extract a component when it:
+- Full-width split: Forest 900 left `52%`, image right `48%`; minimum `30rem`.
+- Left padding `clamp(2rem, 5vw, 5rem)`; white text; gold eyebrow.
+- Primary gold button; secondary transparent with white border.
+- Mobile: content then image; image minimum `18rem`; buttons stack below `30rem`.
 
-- Represents a meaningful section
-- Repeats
-- Has its own behaviour
-- Has substantial internal layout
-- Will be reused on another page
+**Done when:** links work, city order is correct, contrast is strong, and photograph contains no text overlay.
 
-## 11. Image Asset Plan
+## 14. SiteFooter
 
-Required homepage images:
+**Placement:** below `<Routes>` in `App.tsx`; visible on every page. The mockup accidentally omitted it.
 
-1. Hero: lush professionally landscaped Durham-region residential garden
-2. Service—design: designed patio and layered planting
-3. Service—lawn care: healthy maintained lawn and garden edge
-4. Service—seasonal: refined autumn garden and stone steps
-5. Featured transformation: completed backyard patio and garden
-6. Project detail—path: natural stone path with layered planting
-7. Project detail—planting: close detail of hydrangeas and garden lighting
-8. Story: inviting landscaped front entrance
-9. Final CTA: evening garden path leading toward a welcoming home
+Keep the current `SiteFooter.tsx`; finish it later rather than recreating it. Replace `Bowmanville` with `Clarington`, make the placeholder phone consistent with the header, add the logo/navigation/legal row, and place the dark full-width footer background outside its inner PageContainer. `SiteFooter.module.css` is already present and may be populated when this build step is reached.
 
-File naming:
+**Content:** logo; `Thoughtful residential landscaping, lawn care and seasonal maintenance across Durham Region.`; four navigation links; complete city list; heading `Let’s talk about your property.`; placeholder phone; estimate link; `Portfolio concept created for demonstration purposes.`; `© 2026 BrightRoot Lawn & Landscape.`
 
-```text
-hero-landscaped-garden.webp
-service-landscape-design.webp
-service-lawn-garden-care.webp
-service-seasonal-maintenance.webp
-project-whitby-transformation.webp
-project-stone-path-detail.webp
-project-hydrangea-detail.webp
-story-front-entrance.webp
-cta-evening-garden.webp
-```
+- Forest 900; white text; secondary text at 72%; PageContainer.
+- Main padding `4rem 0 3rem`.
+- Desktop columns: brand `1.3fr`, links `0.8fr`, contact/service `1fr`; gap `3rem`; logo width `10rem`.
+- Legal row: `var(--border-thin)` translucent white top border, `3rem` top margin, `1.5rem` top padding.
+- Mobile stacks groups with `2rem` gaps; legal row stacks below `30rem`.
 
-Image rules:
+**Done when:** footer exists on every route, links work, city order/disclaimer are present, and contrast is readable.
 
-- Use licensed stock or original imagery
-- Save locally in the project; do not hotlink production images
-- Convert to WebP or AVIF
-- Hero target: 2000–2400px wide, ideally below 350KB after optimization
-- Project images: 1400–1800px wide, ideally below 250KB each
-- Provide meaningful `alt` text unless the image is purely decorative
-- Set width and height or use `aspect-ratio` to prevent layout shift
-- Keep focal subjects visible at desktop and mobile crops
+## 15. Internal pages and final QA
 
-Selected visual-direction source: an Unsplash garden photograph by Gaurav Kumar. Use it as a direction reference; download the licensed original from its source before including it in the final repository.
+Until the homepage is approved, internal pages may be placeholders with one H1 and sentence. Create Services, Projects, About, Contact, Estimate and NotFound pages.
 
-## 12. Accessibility and Interaction Rules
+Final checks:
 
-- Minimum normal text size: `1rem`
-- Minimum touch target: `2.75rem` square; preferred CTA height `3rem`
-- Semantic heading order: one H1 per page, then H2 sections and H3 card headings
-- All navigation works with keyboard alone
-- Visible focus states
-- Text contrast meets WCAG AA
-- Form fields always have visible labels
-- Motion respects `prefers-reduced-motion`
-- No essential information available only on hover
-- Mobile menu must manage focus and expose its open state with `aria-expanded`
+- Header/current route/footer render from `App.tsx`.
+- Only one H1 per page.
+- Header switches at `64rem`.
+- No horizontal scroll at `20rem`.
+- Focus is visible and navigation works by keyboard.
+- Images use correct alt treatment and aspect ratios.
+- Service-area order is consistent.
+- Production build passes.
 
-## 13. Homepage Build Checkpoints
+## Working rule
 
-### Checkpoint 1 — Foundation
-
-- Remove Vite demo content
-- Add folder structure
-- Add tokens, fonts and global reset
-- Build `PageContainer`, `UtilityBar`, `SiteHeader` and `SiteFooter`
-
-### Checkpoint 2 — Hero
-
-- Add and optimize hero image
-- Build hero layout and responsive overlay
-- Implement CTAs and trust points
-- Test at 1440px, 1024px, 768px, 390px and 320px
-
-### Checkpoint 3 — Main homepage content
-
-- Trust bar
-- Services
-- Project preview
-- Process
-
-### Checkpoint 4 — Credibility and conversion
-
-- Testimonials with sample labels
-- Service area
-- Estimate CTA
-- Footer completion
-
-### Checkpoint 5 — QA
-
-- Keyboard navigation
-- Responsive layout
-- Lighthouse and image optimization
-- Link and form checks
-- Production build
-
-## 14. Acceptance Criteria for the Homepage
-
-The homepage is ready only when:
-
-- It feels like a credible Durham Region landscaping company, not a tutorial
-- The main CTA is obvious within five seconds
-- The service-area order is consistent everywhere
-- No horizontal scrolling occurs at 320px
-- The hero text remains readable across image crops
-- All images are licensed, optimized and locally stored
-- Keyboard focus is visible
-- The page works without animation
-- The production build passes
-- The design remains coherent even before the backend is connected
+Complete one component and its **Done when** list before continuing. If implementation exposes a design problem, update this file so there remains only one source of truth.

@@ -1,0 +1,14 @@
+.button {
+    padding: var(--button-padding);
+    white-space: nowrap;
+    border-radius: 6px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: color var(--transition-base);
+}
+
+
+

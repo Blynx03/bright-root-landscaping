@@ -1,0 +1,266 @@
+.sectionHeading {
+    display: block;
+    --eyebrow-color: var(--color-gold-500);
+    --title-color: var(--color-paper);
+    --description-color: var(--color-cream-100);
+    --link-color: var(--color-gold-500);
+    --link-border: none;
+    --link-border-radius: none;
+    --link-icon-stroke-color: var(--color-gold-500);
+}
+
+.noEyebrow {
+    --displayEyebrow: none;
+}
+
+.defaultEyebrow {
+    --displayEyebrow: block;
+}
+
+.inverse {
+    --eyebrow-color: var(--color-forest-800);
+    --eyebrow-suffix-color: currentColor;
+    --title-color: var(--color-forest-900);
+    --description-color: var(--color-forest-800);
+}
+
+.story, .hero {
+    --eyebrow-suffix-color: var(--color-gold-500);
+}
+
+.story {
+    --link-color: var(--color-forest-800);
+    --link-border: 3px solid var(--color-gold-500);
+    --link-border-radius: 4px;
+    --link-icon-stroke-color: var(--color-forest-800);
+    --description-padding: var(--space-4) 0 var(--space-7);
+    --link-padding: var(--space-3) var(--space-4);
+}
+
+.hero {
+    --eyebrow-color: var(--color-gold-500);
+}
+
+.transformation {
+    --link-padding: var(--space-4) var(--space-2);
+    --description-padding: var(--space-3) 0 0;
+}
+
+.responsive, .stacked {
+    --flex-direction: column;
+    --titleContentGap: var(--gap-heading);
+}
+
+.mobileHeading {
+    display: flex;
+    flex-direction: var(--flex-direction);
+    gap: var(--titleContentGap);
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    width: fit-content;
+    color: var(--eyebrow-color);
+    text-transform: uppercase;
+    font-size: var(--font-size-eyebrow);
+    font-weight: 600;
+    letter-spacing: 1.1px;
+}
+
+.eyebrow::after {
+    content: '';
+    display: var(--displayEyebrow);
+    width: 2.5rem;
+    height: 1px;
+    background-color: var(--eyebrow-suffix-color);
+}
+
+.buttonsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-group);
+    font-size: var(--font-size-button);
+}
+
+.estimateButton {
+    background-color: var(--color-gold-500);
+    color: var(--color-forest-900);
+    font-weight: 600;
+}
+
+.servicesButton {
+    border: 1px solid var(--color-paper);
+    color: var(--color-paper);
+}
+
+.iconContainer {
+    display: none;
+}
+
+.locations {
+    color: var(--color-ink-300);
+    font-size: var(--font-size-small);
+    margin-bottom: var(--section-padding);
+}
+
+.title {
+    font-family: var(--font-heading);
+    color: var(--title-color);
+    font-size: var(--font-size-h2);
+    line-height: 2.5rem;
+}
+
+.description {
+    color: var(--description-color);
+    font-size: var(--font-size-small);
+    margin-bottom: var(--space-7);
+}
+
+.linkContainer {
+    margin-top: -2rem;
+    /* width: 100%; */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: var(--gap-group);
+    margin-bottom: var(--space-6);
+    border: var(--link-border);
+    border-radius: var(--link-border-radius);
+    padding: var(--link-padding);
+}
+
+.link {
+    width: auto;
+    /* height: var(--space-6); */
+    color: var(--link-color);
+    text-decoration: none;
+    font-size: var(--font-size-small);
+    font-weight: 600;
+    transition: transform var(--transition-fast);
+    cursor: pointer;
+}
+
+.link:hover {
+    transform: scale(1.1);
+}
+
+.arrowIcon {
+    display: inline-block;
+    width: var(--space-5);
+}
+
+.desktopHeading {
+    display: none;
+}
+
+@media (min-width: 48rem) and (max-width: 63.9375rem) {
+    .description {
+        width: 70%;
+        padding: var(--description-padding);
+    }
+}
+
+@media (min-width: 64rem) {
+    .mobileHeading {
+        display: none;
+    }
+
+    .desktopHeading {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-heading);
+        height: 100%;
+    }
+
+    .responsive {
+        --flex-direction: row;
+        --titleContentGap: var(--space-8);
+    }
+
+    .stacked {
+        --flex-direction: column;
+        --titleContentGap: var(--space-4);
+    }
+
+    .titleDescriptionContainer {
+        display: flex;
+        flex-direction: var(--flex-direction);
+        justify-content: flex-end;
+        align-items: flex-start;
+        margin-bottom: var(--space-8);
+        gap: var(--titleContentGap);
+    }
+
+    .eyebrow::after {
+        width: 4rem;
+        height: 2.2px;
+        background-color: var(--eyebrow-suffix-color);
+    }
+
+    .title {
+        flex: 1;
+        font-size: clamp(2rem, 2vw, var(--font-size-h1));
+        line-height: clamp(2.2rem, 3vh, 4rem);
+    }
+
+    .description {
+        padding: var(--description-padding);
+        flex: 1;
+        font-size: var(--font-size-body);
+        margin: 0;
+    }
+
+    .titleDescriptionContainer {
+        margin-bottom: var(--space-4);
+    }
+
+    .buttonsContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        margin-bottom: var(--space-5);
+        justify-content: flex-start;
+        gap: var(--space-6);
+    }
+
+    .estimateButton, .servicesButton {
+        padding: var(--space-4) var(--space-6);
+    }
+
+    .areasContainer {
+        display: flex;
+        gap: var(--gap-group);
+        justify-content: flex-start;
+    }
+
+    .iconContainer {
+        display: block;
+        width: var(--space-6);
+        height: var(--space-6);
+    }
+
+    .areaIcon {
+        fill: var(--color-ink-600);
+    }
+
+    .locations {
+        font-size: var(--font-size-body);
+    }
+
+    .linkContainer {
+        width: max-content;
+        height: max-content;        
+        padding: var(--link-padding);
+        place-items: center;
+    }
+
+    .link {
+        color: var(--link-color);
+    }
+
+    .arrowIcon {
+        stroke: var(--link-icon-stroke-color);
+    }
+}

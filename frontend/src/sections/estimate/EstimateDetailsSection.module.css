@@ -1,0 +1,299 @@
+.estimateDetailsSection {
+    display: grid;
+    width: 100%;
+    height: 100%;
+}
+
+.contactOnlyContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-ideal);
+    margin-bottom: var(--space-8);
+}
+
+.contactOnlyFieldContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-ideal);
+}
+
+.contactDetailsContainer, .projectDetailsContainer, .planningContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-ideal);
+    padding: var(--space-4) 0 var(--space-5);
+}
+
+.title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h3);
+    border-bottom: var(--border-thin) solid var(--color-border);
+    color: var(--color-forest-900);
+}
+
+.locationAndProjectTypeContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-ideal);
+}
+
+.detailsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-ideal);
+}
+
+.projectTypeContainer, .budgetContainer, .timelineContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.projectTypeContainer {
+    margin-bottom: var(--space-5);
+}
+
+.budgetContainer, .timelineContainer {
+    margin-bottom: 2.5rem;
+}
+
+.fieldName {
+    position: absolute;
+    font-size: var(--font-size-small);
+    top: -1.4rem;
+    left: 0;
+}
+
+.select, ::picker(select) {
+    position: absolute;
+    width: 100%;
+    padding: var(--space-2) var(--space-4);
+    border: var(--border-thin) solid var(--color-border);
+    appearance: base-select;
+    background-color: var(--color-paper);
+    box-shadow: var(--shadow-card);
+}
+
+.select::picker-icon {
+    color: var(--color-forest-800);
+}
+
+.select:open::picker-icon {
+    rotate: 180deg;
+}
+
+.select:focus {
+    border-color: var(--color-success);
+}
+
+.options {
+    color: var(--color-forest-800);
+}
+
+.options:hover {
+    background-color: var(--color-cream-100);
+}
+
+#property-type:invalid {
+    color: red;
+}
+
+select:invalid {
+    color: purple;
+}
+
+.legend {
+    font-size: var(--font-size-small);
+}
+
+.serviceOptionsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.serviceOptionsContainer .label {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.checkboxOptions:focus {
+    outline: none;
+}
+
+.budgetAndTimelineContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-ideal);
+}
+
+.textAreaContainer {
+    width: 100%;
+}
+
+.comment {
+    padding: var(--space-2) var(--space-2);
+    width: 100%;
+    resize: vertical;
+    font-size: var(--font-size-body);
+    border-color: var(--color-border);
+    box-shadow: var(--shadow-card);
+}
+
+.comment:focus {
+    border-color: var(--color-success);
+}
+
+.comment::placeholder {
+    color: var(--color-ink-300);
+    font-size: var(--font-size-small);
+}
+
+.labelTC {
+    font-size: var(--font-size-small);
+    color: var(--color-forest-800);
+}
+
+.consentContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 8fr;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+}
+
+.inputTC {
+    width: var(--space-5);
+    height: var(--space-5);
+    justify-self: center;
+    align-self: center;
+    background-color: var(--color-paper);
+}
+
+.submitButton {
+    background-color: var(--color-gold-500);
+    width: 100%;
+    padding: var(--space-2); 
+    border: none;
+    border-radius: 4px;
+    color: var(--color-cream-100);
+    font-size: var(--font-size-button);
+    margin-bottom: var(--space-5);
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+.submitButton:hover {
+    color: var(--color-forest-800);
+}
+
+.submitMessage:empty {
+    display: none;
+}
+
+.submitMessage {
+    padding: var(--space-3);
+    border: var(--border-thin) solid;
+    border-radius: var(--radius-small);
+    font-size: var(--font-size-small);
+    margin-bottom: var(--space-6);
+}
+
+.successMessage {
+    color: var(--color-forest-800);
+    background-color: var(--color-forest-100);
+    border-color: var(--color-forest-500);
+}
+
+.errorMessage {
+    color: #7a1f1f;
+    background-color: #fbeaea;
+    border-color: #c96767;
+}
+
+.submitButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+/* tablet */
+@media (min-width: 48rem) and (max-width: 63.9375rem) {
+    .fieldName {
+        top: -1.7rem;
+    }
+
+    .serviceOptionsContainer {
+        padding-left: var(--space-6);
+    }
+
+    .textAreaContainer {
+        margin-bottom: var(--space-3);
+    }
+
+    .consentContainer {
+        padding: var(--space-4) var(--space-1);
+        border: var(--border-thin) solid var(--color-ink-300);
+        border-radius: 6px;
+
+    }
+
+    .submitButton {
+        width: 50%;
+        display: grid;
+        padding: var(--space-3);
+        justify-self: center;
+    }
+}
+
+/* desktop */
+@media (min-width: 64rem) {
+    .estimateDetailsSection {
+        padding: var(--space-5) 0;
+        background-color: var(--color-paper);
+        border: var(--border-thin) solid var(--color-border);
+        border-radius: 6px;
+        height: 100%;
+    }
+
+    .contactOnlyContainer {
+        gap: var(--gap-section);
+    }
+
+    .contactOnlyFieldContainer {
+        gap: var(--gap-section);
+    }
+
+    .contactDetailsContainer, .projectDetailsContainer, .planningContainer, .textAreaContainer {
+    /* padding: 0; */
+    /* gap: var(--gap-ideal); */
+    padding: var(--space-2) 0;
+    }
+
+    .locationAndProjectTypeContainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .detailsContainer {
+        flex-direction: row;
+    }
+
+    .serviceOptionsContainer {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: var(--gap-group);
+    }
+
+    .label {
+        flex-wrap: nowrap;
+    }
+
+    .budgetAndTimelineContainer {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .labelTC {
+        padding: var(--space-2) 0;
+    }
+}

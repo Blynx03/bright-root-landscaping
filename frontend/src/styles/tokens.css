@@ -1,5 +1,6 @@
 :root {
   /* Colors */
+  --color-forest-dark: #0a2016;
   --color-forest-900: #102a1e;
   --color-forest-800: #173a2a;
   --color-leaf-600: #436b4f;
@@ -9,6 +10,7 @@
   --color-white: #ffffff;
   --color-ink-900: #1f2923;
   --color-ink-600: #5f6b63;
+  --color-ink-300: #adb3af;
   --color-gold-500: #bd8b4b;
   --color-border: #d9ddcf;
   --color-error: #a63d40;
@@ -61,9 +63,13 @@
   /* Common gaps */
   --gap-eyebrow: 1rem;
   --gap-heading: 1.25rem;
+  --gap-paragraph: 1.5rem;
+  --gap-ideal: 2rem;
   --gap-section: 3rem;
   --gap-card: 1rem;
   --gap-group: 0.75rem;
+
+  --border-thin: 0.0625rem;
 
   /* Shape and Elevation */
   --radius-sm: 0.5rem;
@@ -72,26 +78,39 @@
   --radius-xl: 1.5rem;
   --radius-pill: 999px;
 
-  --shadow-card: 0 0.75rem 2.125rem rgba(16, 42, 30, 0.1);
-  --shadow-floating: 0 0.125rem 3.4375rem rgba(16, 42, 30, 0.18);
+--shadow-card:
+  0 0.25rem 0.75rem rgba(16, 42, 30, 0.12),
+  0 0.75rem 2rem rgba(16, 42, 30, 0.18);
 
-  --transition-fast: 160ms ease;
+--shadow-floating:
+  0 0.5rem 1.25rem rgba(16, 42, 30, 0.16),
+  0 1.5rem 3.5rem rgba(16, 42, 30, 0.26);
+
+  --transition-fast: 125ms ease;
   --transition-base: 240ms ease;
   --transition-slow: 420ms ease;
+
+  --button-padding: 1rem;
+
 }
 
 /* Tablet */
-@media (min-width: 48rem) {
+@media (min-width: 48rem) and (max-width: 63.9375rem) {
   :root {
     --font-size-display: 3.5rem;
-    --font-size-h1: 3rem;
-    --font-size-h2: 2.5rem;
-    --font-size-h3: 1.375rem;
-    --font-size-lead: 1.125rem;
+    --font-size-h1: 3.25rem;
+    --font-size-h2: 2.75rem;
+    --font-size-h3: 1.35rem;
+    --font-size-lead: 1.25rem;
+    --font-size-eyebrow: 0.85rem;
+    --font-size-small: 1rem;
 
-    --page-gutter: 1.5rem;
+    --page-gutter: 2.5rem;
 
     --section-padding: 5rem;
+
+    --gap-ideal: 2.5rem;
+
   }
 }
 
@@ -103,12 +122,14 @@
     --font-size-h2: 3rem;
     --font-size-h3: 1.5rem;
     --font-size-lead: 1.1875rem;
+    --font-size-eyebrow: 0.8rem;
 
     --page-gutter: 2rem;
 
     --section-padding: 6rem;
 
     --gap-card: 1.5rem;
+
   }
 }
 
