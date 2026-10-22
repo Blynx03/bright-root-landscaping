@@ -130,7 +130,7 @@ select:invalid {
     width: 100%;
 }
 
-.comment {
+.comment, .message {
     padding: var(--space-2) var(--space-2);
     width: 100%;
     resize: vertical;
@@ -143,7 +143,7 @@ select:invalid {
     border-color: var(--color-success);
 }
 
-.comment::placeholder {
+.comment::placeholder, .message::placeholder {
     color: var(--color-ink-300);
     font-size: var(--font-size-small);
 }

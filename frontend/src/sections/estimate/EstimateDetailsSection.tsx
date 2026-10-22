@@ -221,6 +221,10 @@ const EstimateDetailsSection = ({className = '', formMode}: EstimateDetailsProps
                                         })}
                                     </select>
                                 </div>
+                                <div className={styles.textAreaContainer}>
+                                    <div className={styles.title}>Tell us about your project.</div>
+                                    <textarea id='message' rows={3} value={contactData.message} className={styles.message} name='message' onChange={(e) => handleChangeContact('message', e.target.value)} placeholder={textAreaPlaceholder}></textarea>
+                                </div>
                             </div>
                         </div>
                         <button type='submit' className={styles.submitButton} disabled={isSubmitting}>
