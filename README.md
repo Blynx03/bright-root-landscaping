@@ -4,12 +4,12 @@
 
 The project combines an elegant, nature-inspired interface with practical customer inquiry and estimate-request workflows. Visitors can explore services and completed projects, learn about the company, submit a general inquiry, or provide detailed information for a project estimate.
 
-![React](https://img.shields.io/badge/React-Frontend-61DAFB?logo=react&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-Type%20Safety-3178C6?logo=typescript&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-Build%20Tool-646CFF?logo=vite&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-Express-339933?logo=nodedotjs&logoColor=white)
-![Responsive Design](https://img.shields.io/badge/Responsive-Mobile%20First-436B4F)
-![Email](https://img.shields.io/badge/Email-Resend-000000)
+![React](https://img.shields.io/badge/React-Frontend-61DAFB?style=flat&logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-Type%20Safety-3178C6?style=flat&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-Build%20Tool-646CFF?style=flat&logo=vite&logoColor=white&cacheSeconds=3600)
+![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=flat&logo=nodedotjs&logoColor=white)
+![Responsive Design](https://img.shields.io/badge/Responsive-Mobile%20First-436B4F?style=flat)
+![Email](https://img.shields.io/badge/Email-Resend-333333?style=flat&logo=resend&logoColor=white&cacheSeconds=3600)
 
 ---
 
