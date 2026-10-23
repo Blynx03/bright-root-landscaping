@@ -304,6 +304,7 @@ const EstimateDetailsSection = ({className = '', formMode}: EstimateDetailsProps
                                 <div className={styles.projectTypeContainer}>
                                     <div className={styles.fieldName}>Project type</div>
                                     <select id='property-type' className={styles.select} name='property-type' value={clientData.projectType} onChange={(e) => handleChangeEstimate('projectType', e.target.value)}>
+                                        <option value='' disabled>Select project type</option>
                                         { projectTypeOptions.map((data) => {
                                             return (
                                                 <option key={data.value} value={data.value} className={styles.options}>{data.label}</option>
@@ -351,6 +352,7 @@ const EstimateDetailsSection = ({className = '', formMode}: EstimateDetailsProps
                                 <div className={styles.budgetContainer}>
                                     <div className={styles.fieldName}>Estimated budget</div>
                                     <select id='estimated-budget' className={styles.select} name='budget' value={clientData.estimatedBudget} onChange={(e) => handleChangeEstimate('estimatedBudget', e.target.value)}>
+                                        <option value='' disabled>Select budget</option>
                                         { budgetOptions.map((data) => {
                                             return (
                                                 <option key={data.value} value={data.value} className={styles.options}>{data.label}</option>
@@ -361,6 +363,7 @@ const EstimateDetailsSection = ({className = '', formMode}: EstimateDetailsProps
                                 <div className={styles.timelineContainer}>
                                     <div className={styles.fieldName}>Preferred timeline</div>
                                     <select id='preferred-timeline' className={styles.select} name='timeline' value={clientData.timeline} onChange={(e) => handleChangeEstimate('timeline', e.target.value)}>
+                                        <option value='' disabled>Select a timeline</option>
                                         {timelineOptions.map((data) => {
                                             return (
                                                 <option key={data.value} id={data.value} value={data.value} className={styles.options}>{data.label}</option>
@@ -377,7 +380,7 @@ const EstimateDetailsSection = ({className = '', formMode}: EstimateDetailsProps
 
                         <div className={styles.consentContainer}>
                             <input id='consent' name='consent' type='checkbox' checked={clientData.consent} className={styles.inputTC} onChange={(e) => { setClientData((prevData) => ({...prevData, consent: e.target.checked}))}} />
-                            <label htmlFor='terms' className={styles.labelTC}>
+                            <label htmlFor='consent' className={styles.labelTC}>
                                 {termsAndCondition}
                             </label>
                         </div>
