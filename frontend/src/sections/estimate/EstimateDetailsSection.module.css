@@ -199,7 +199,8 @@ select:invalid {
 }
 
 .successMessage {
-    color: var(--color-forest-800);
+    text-align: center;
+    color: var(--color-leaf-600);
     background-color: var(--color-forest-100);
     border-color: var(--color-forest-500);
 }
@@ -208,6 +209,7 @@ select:invalid {
     color: #7a1f1f;
     background-color: #fbeaea;
     border-color: #c96767;
+    text-align: center;
 }
 
 .submitButton:disabled {
