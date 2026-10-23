@@ -201,7 +201,7 @@ select:invalid {
 .successMessage {
     text-align: center;
     color: var(--color-leaf-600);
-    background-color: var(--color-forest-100);
+    background-color: var(--color-success);
     border-color: var(--color-forest-500);
 }
 
